@@ -17,7 +17,8 @@ var nfl = {
           "squad" : function( $, currentValue, index, fullArray ) {
             var currentRow = "table tbody tr:eq(" + index + ")",
                 $squadHeader = $(currentRow).closest('h2');
-            return  $squadHeader.text(),
+
+            return  $squadHeader.text();
           }
         },
       },
