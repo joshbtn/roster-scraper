@@ -2,12 +2,14 @@
   "name": "roster-scraper",
   "description": "",
   "version": "0.0.1",
-  "main": "index.js",
+  "main": "lib\main.js",
   "directories": {
     "test": "test"
   },
   "dependencies": {},
   "devDependencies": {
+    "jquery": "^2.1.4",
+    "jsdom": "^7.0.2"
   },
   "scripts": {
     "start": "node lib/cli.js",
