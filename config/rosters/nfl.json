@@ -1,0 +1,23 @@
+{
+  "teams": [
+    {
+      "name": "Eagles",
+      "roster": {
+        "url": "",
+        "selectors" : {
+          "number": "",
+          "name": "",
+          "position": "",
+          "weight": "",
+          "age": "",
+          "experience": "",
+          "college": "",
+          "Squad" : ""
+        }
+      },
+      "info": {
+        "url": "",
+      }
+    }
+  ]
+}
