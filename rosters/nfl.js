@@ -14,7 +14,7 @@ var nfl = {
           "age": "table tbody tr td.col-bd",
           "experience": "table tbody tr td.col-exp",
           "college": "table tbody tr td.col-college",
-          "squad" : function( $, currentValue, index, fullArray ) {
+          "squad" : function($, currentValue, index, fullArray) {
             var currentRow = "table tbody tr:eq(" + index + ")",
                 $squadHeader = $(currentRow).closest('h2');
 
@@ -28,3 +28,5 @@ var nfl = {
     }
   ]
 }
+
+module.export = nfl;
