@@ -9,7 +9,7 @@ TODO add install instructions.
 ## Run
 
 ### From Source
-Clone the repository and move into the directory (run `cd roster-scraper`)
+Clone the repository and move into the cloned directory (run `cd roster-scraper`)
 
 Run:  
 `node lib/main.js --roster ROSTER`
