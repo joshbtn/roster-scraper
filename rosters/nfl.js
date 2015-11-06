@@ -2,9 +2,9 @@ var nfl = {
   "team": [
     {
       "name": "Eagles",
-      "url": "http://www.philadelphiaeagles.com/",
+      "uri": "http://www.philadelphiaeagles.com/",
       "roster": {
-        "url": "http://www.philadelphiaeagles.com/team/roster.html",
+        "uri": "http://www.philadelphiaeagles.com/team/roster.html",
         "document": "",
         "dataSource" : {
           "number" : "table tbody tr td.col-jersey",
