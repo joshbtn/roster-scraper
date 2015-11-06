@@ -11,7 +11,10 @@
     "cli": "^0.11.1",
     "docopt": "^0.6.2",
     "gulp": "^3.9.0",
+    "gulp-jasmine": "^2.2.0",
     "gulp-yuidoc": "^0.1.2",
+    "jasmine": "^2.3.2",
+    "jasmine-reporters": "^2.0.7",
     "jquery": "^2.1.4",
     "jsdom": "^7.0.2"
   },
