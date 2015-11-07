@@ -1,9 +1,9 @@
 var gulp = require('gulp');
-var reporters = require('jasmine-reporters');
+var jasmine = require('gulp-mocha');
  
 gulp.task('default', function () {
-    return gulp.src('spec/scraperSpec.js')
-        .pipe(jasmine({
+    return gulp.src(['lib/Scrape.js','spec/ScrapeSpec.js'])
+        .pipe(mocha({
             reporter: new reporters.JUnitXmlReporter()
         }));
 })
