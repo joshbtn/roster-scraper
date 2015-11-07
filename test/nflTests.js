@@ -1,13 +1,11 @@
 var expect = require("chai").expect;
 
 describe("NFL Scraper", function() {
-  var scraper = require('../lib/scrapers/nfl');  
+  var scraper = require('../lib/scrapers/NFL');  
   
   it("Srape should load the nfl scraper with no issues.", function() {
-    var nfl = scrape("nfl", {autoLoad: false});
     
-    expect(nfl).to.not.equal(null);
-    expect(nfl).to.not.equal(undefined);
+    expect(scraper).to.not.equal(null);
   });
   
 });
