@@ -10,5 +10,15 @@ describe("Scrape", function() {
     expect(nfl).to.not.equal(undefined);
   });
   
+   it("should scrape eagles test roster", function(){
+    var nfl = scrape("NFL", {autoLoad: false});
+    
+    var eaglesDocument = fs.readFileSync('./assets/nfl_eagles.html').toString();
+    
+    nfl.getTeam('eagles').document = eaglesDocument;
+    
+    var data = scraper.getData();
+  });
+  
 });
 
