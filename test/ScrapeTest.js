@@ -5,7 +5,9 @@ describe("Scrape", function() {
   
   it("Srape should load the nfl scraper with no issues.", function() {
     var nfl = scrape("nfl", {autoLoad: false});
-    expect(nfl.autoLoad).to.not.equal(null);
+    
+    expect(nfl).to.not.equal(null);
+    expect(nfl).to.not.equal(undefined);
   });
   
 });
