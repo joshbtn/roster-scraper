@@ -77,6 +77,8 @@ describe("Scrape", function() {
   it("should scrape test leauge and return a list of players greater than 1", function(){
     var scraper = scrape(testLeague, {autoLoad: false});
     
+    scraper.scrape();
+    
     var players = scraper.getData(),
         playerCount = players.length;
     
