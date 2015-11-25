@@ -1,8 +1,8 @@
 var expect = require("chai").expect,
     fs = require('fs'),
-    BaseScraper = require("../lib/scraper/BaseScraper.js");
+    BaseScraper = require(__dirname + "/../lib/scraper/BaseScraper.js");
 
-describe("scrapeHtml", function() {
+describe("BaseScraper.scrapeHtml", function() {
   
   it("should return 3 rows of scraped data for test 1", function(){
     var colSelectors = {
@@ -26,7 +26,7 @@ describe("scrapeHtml", function() {
     
   });
   
-  var htmlTest1 = fs.readFileSync("./assets/BaseScraper_Test1.html");
+  var htmlTest1 = fs.readFileSync(__dirname + "/assets/BaseScraper_Test1.html");
   
 });
 
