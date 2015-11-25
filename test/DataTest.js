@@ -51,3 +51,14 @@ describe("Data.normalize2dArrayLength", function(){
     expect(normalized2dArray[2].length).to.equal(expectedLenth);
   });
 });
+
+describe("Data.map2dArrayLengths", function() {
+   it("should return an array of lengths from a 2d array", function(){
+     var originalArray  = [[1,2,3,4,5,6],[4,5],[7,8,9,10]];
+     var actual = originalArray.map(Data.map2dArrayLengths);
+
+     expect(actual[0]).to.equal(6);
+     expect(actual[1]).to.equal(2);
+     expect(actual[2]).to.equal(4);
+   }) ;
+});
