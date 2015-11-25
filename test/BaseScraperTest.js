@@ -1,3 +1,5 @@
+'use strict';
+
 var expect = require("chai").expect,
     fs = require('fs'),
     BaseScraper = require(__dirname + "/../lib/scraper/BaseScraper.js");
