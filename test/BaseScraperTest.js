@@ -1,11 +1,22 @@
-var expect = require("chai").expect;
+var expect = require("chai").expect,
+    fs = require('fs'),
+    BaseScraper = require("../lib/scraper/BaseScraper.js");
 
-describe("BaseScraper", function() {
+describe("scrapeHtml", function() {
   
   it("should return 3 rows of scraped data for test 1", function(){
+    var colSelectors = {
+      id: "tr td:nth-child(1)",
+      name: "tr td:nth-child(2)",
+      memo: "tr td:nth-child(3)"
+    }
     
-    //expect(n).to.not.equal(null)
+    var results = BaseScraper.scrapeHtml(htmlTest1, colSelectors);
+    
+    expect(results.length).to.equal(3);
   });
+  
+  // End of tests
   
   beforeEach(function(){
    
@@ -14,6 +25,8 @@ describe("BaseScraper", function() {
   afterEach(function(){
     
   });
+  
+  var htmlTest1 = fs.readFileSync("./assets/BaseScraper_Test1.html");
   
 });
 
