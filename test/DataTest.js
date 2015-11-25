@@ -39,3 +39,15 @@ describe("Data.getMaxOfArray", function() {
     expect(actual).to.equal(50);
   })
 });
+
+describe("Data.normalize2dArrayLength", function(){
+  it("should return a 2d array where sub arrays are equal length.", function(){
+    var normalized2dArray = Data.normalize2dArrayLength([[1,2],[1],[2,3,4]]);
+    
+    var expectedLenth = 3;
+    
+    expect(normalized2dArray[0].length).to.equal(expectedLenth);
+    expect(normalized2dArray[1].length).to.equal(expectedLenth);
+    expect(normalized2dArray[2].length).to.equal(expectedLenth);
+  });
+});
