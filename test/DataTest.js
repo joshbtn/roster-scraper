@@ -34,5 +34,8 @@ describe("Data.arrayAllEqual", function() {
 });
 
 describe("Data.getMaxOfArray", function() {
-    
+  it("should return the maximum number in the array", function(){
+    var actual = Data.getMaxOfArray([1,3,50,7,9]);
+    expect(actual).to.equal(50);
+  })
 });
