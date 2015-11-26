@@ -41,8 +41,8 @@ describe("Data.getMaxOfArray", function() {
 });
 
 describe("Data.normalize2dArrayLength", function(){
-  it("should return a 2d array where sub arrays are equal length.", function(){
-    var normalized2dArray = Data.normalize2dArrayLength([[1,2],[1],[2,3,4]]);
+  it("should return a 2d array where sub arrays are equal length", function(){
+    var normalized2dArray = Data.normalize2dArrayLength([[1,2],[1],[2,3,4]], null);
     
     var expectedLenth = 3;
     
