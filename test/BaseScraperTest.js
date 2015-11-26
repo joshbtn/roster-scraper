@@ -18,17 +18,47 @@ describe("BaseScraper.scrapeHtml", function() {
     expect(results.length).to.equal(3);
   });
   
-  // End of tests
-  
-  beforeEach(function(){
-   
+  it("should return column based on custom callback for test 2", function(){
+    var colSelectors = {
+      first: "tr td:nth-child(1)",
+      second: "tr td:nth-child(2)",
+      sum: function(window, currentIndex, fullElementArray){
+        var currentRow = fullElementArray[currentIndex],
+            num1 = parseInt(currentRow[0].text()),
+            num2 = parseInt(currentRow[1].text())
+        
+        return num1 + num2; 
+      }
+    }
+    
+    var results = BaseScraper.scrapeHtml(htmlTest2, colSelectors);
+    
+    expect(results[0][3]).to.equal(2);
+    expect(results[1][3]).to.equal(4);
+    expect(results[2][3]).to.equal(6);
   });
   
-  afterEach(function(){
+  it("should return column based on custom callback for test 2 in the right column position", function(){
+    var colSelectors = {
+      first: "tr td:nth-child(1)",
+      sum: function(window, currentIndex, fullElementArray){
+        var currentRow = fullElementArray[currentIndex],
+            num1 = parseInt(currentRow[0].text()),
+            num2 = parseInt(currentRow[1].text())
+        
+        return num1 + num2; 
+      },
+      second: "tr td:nth-child(2)",
+    }
     
+    var results = BaseScraper.scrapeHtml(htmlTest2, colSelectors);
+    
+    expect(results[0][2]).to.equal(2);
+    expect(results[1][2]).to.equal(4);
+    expect(results[2][2]).to.equal(6);
   });
   
   var htmlTest1 = fs.readFileSync(__dirname + "/assets/BaseScraper_Test1.html");
+  var htmlTest2 = fs.readFileSync(__dirname + "/assets/BaseScraper_Test2.html");
   
 });
-
