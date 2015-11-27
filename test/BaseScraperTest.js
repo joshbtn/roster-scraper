@@ -2,6 +2,7 @@
 
 var expect = require("chai").expect,
     fs = require('fs'),
+    Dom = require(__dirname + "/../lib/util/Dom.js"),
     BaseScraper = require(__dirname + "/../lib/scraper/BaseScraper.js"),
     htmlTest1 = fs.readFileSync(__dirname + "/assets/BaseScraper_Test1.html"),
     htmlTest2 = fs.readFileSync(__dirname + "/assets/BaseScraper_Test2.html");
@@ -71,7 +72,8 @@ describe("BaseScraper.getElementArray", function(){
       memo: "tr td:nth-child(3)"
     };
     
-    var elementArray = BaseScraper.getElementArray(htmlTest1, colSelectors);
+    var window = Dom.getDomWithJquery(htmlTest1),
+        elementArray = BaseScraper.getElementArray(window, colSelectors);
     
     expect(elementArray[0][2].innerHTML).to.equal('77de68daecd823babbb58edb1c8e14d7106e83bb');
     expect(elementArray[1].length).to.equal(3);
