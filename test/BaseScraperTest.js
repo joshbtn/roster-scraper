@@ -36,7 +36,7 @@ describe("BaseScraper.scrapeHtml", function() {
     }
     
     var results = BaseScraper.scrapeHtml(htmlTest2, colSelectors);
-    console.log(results)
+    
     expect(results[2][0]).to.equal(2);
     expect(results[2][1]).to.equal(4);
     expect(results[2][2]).to.equal(6);
