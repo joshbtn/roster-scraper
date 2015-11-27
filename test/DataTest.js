@@ -52,6 +52,18 @@ describe("Data.normalize2dArrayLength", function(){
   });
 });
 
+describe("Data.normalize2dArrayLength", function(){
+  it("should return original object when it comes across an item that is not an array.", function(){
+    var normalized2dArray = Data.normalize2dArrayLength([[1,2],function(){},[2,3,4]], null);
+    
+    var expectedLenth = 3;
+    
+    expect(normalized2dArray[0].length).to.equal(expectedLenth);
+    expect(typeof normalized2dArray[1]).to.equal('function');
+    expect(normalized2dArray[2].length).to.equal(expectedLenth);
+  });
+});
+
 describe("Data.map2dArrayLengths", function() {
    it("should return an array of lengths from a 2d array", function(){
      var originalArray  = [[1,2,3,4,5,6],[4,5],[7,8,9,10]];

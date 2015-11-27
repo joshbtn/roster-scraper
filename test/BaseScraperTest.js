@@ -2,7 +2,9 @@
 
 var expect = require("chai").expect,
     fs = require('fs'),
-    BaseScraper = require(__dirname + "/../lib/scraper/BaseScraper.js");
+    BaseScraper = require(__dirname + "/../lib/scraper/BaseScraper.js"),
+    htmlTest1 = fs.readFileSync(__dirname + "/assets/BaseScraper_Test1.html"),
+    htmlTest2 = fs.readFileSync(__dirname + "/assets/BaseScraper_Test2.html");
 
 describe("BaseScraper.scrapeHtml", function() {
   
@@ -58,7 +60,23 @@ describe("BaseScraper.scrapeHtml", function() {
     expect(results[2][2]).to.equal(6);
   });
   
-  var htmlTest1 = fs.readFileSync(__dirname + "/assets/BaseScraper_Test1.html");
-  var htmlTest2 = fs.readFileSync(__dirname + "/assets/BaseScraper_Test2.html");
-  
+});
+
+describe("BaseScraper.getElementArray", function(){
+  it("should get an element array for test1", function(){
+    var colSelectors = {
+      id: "tr td:nth-child(1)",
+      name: "tr td:nth-child(2)",
+      random: function(){return "foo"},
+      memo: "tr td:nth-child(3)"
+    };
+    
+    var elementArray = BaseScraper.getElementArray(htmlTest1, colSelectors);
+    
+    expect(elementArray[0][2].innerHTML).to.equal('77de68daecd823babbb58edb1c8e14d7106e83bb');
+    expect(elementArray[1].length).to.equal(3);
+    expect(typeof elementArray[2]).to.equal('function');
+    expect(elementArray[3].length).to.equal(3);
+
+  });
 });
