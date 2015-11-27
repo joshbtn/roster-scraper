@@ -27,8 +27,8 @@ describe("BaseScraper.scrapeHtml", function() {
       second: "tr td:nth-child(2)",
       sum: function(window, currentIndex, fullElementArray){
         var currentRow = fullElementArray[currentIndex],
-            num1 = parseInt(currentRow[0].text()),
-            num2 = parseInt(currentRow[1].text())
+            num1 = parseInt(currentRow[0].innerHTML),
+            num2 = parseInt(currentRow[1].innerHTML);
         
         return num1 + num2; 
       }
@@ -44,11 +44,12 @@ describe("BaseScraper.scrapeHtml", function() {
   it("should return column based on custom callback for test 2 in the right column position", function(){
     var colSelectors = {
       first: "tr td:nth-child(1)",
-      sum: function(window, currentIndex, fullElementArray){
-        var currentRow = fullElementArray[currentIndex],
-            num1 = parseInt(currentRow[0].text()),
-            num2 = parseInt(currentRow[1].text())
-        
+      sum: function(window, currentRowIndex, fullElementArray){
+        console.log(currentRowIndex)
+        var element1 = fullElementArray[0][currentRowIndex], 
+            element2 = fullElementArray[1][currentRowIndex],
+            num1 = element1 ? element1.innerHTML : 0,
+            num2 = element2 ? element2.innerHTML : 0;
         return num1 + num2; 
       },
       second: "tr td:nth-child(2)",
