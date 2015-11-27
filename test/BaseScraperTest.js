@@ -25,40 +25,20 @@ describe("BaseScraper.scrapeHtml", function() {
     var colSelectors = {
       first: "tr td:nth-child(1)",
       second: "tr td:nth-child(2)",
-      sum: function(window, currentIndex, fullElementArray){
-        var currentRow = fullElementArray[currentIndex],
-            num1 = parseInt(currentRow[0].innerHTML),
-            num2 = parseInt(currentRow[1].innerHTML);
+      sum: function(window, currentRowIndex, fullElementArray){
+        var elementFirst = fullElementArray[0][currentRowIndex],
+            elementSecond = fullElementArray[1][currentRowIndex],
+            numFirst = parseInt(elementFirst.innerHTML),
+            numSecond = parseInt(elementSecond.innerHTML);
         
-        return num1 + num2; 
+        return numFirst + numSecond; 
       }
     }
     
     var results = BaseScraper.scrapeHtml(htmlTest2, colSelectors);
-    
-    expect(results[0][3]).to.equal(2);
-    expect(results[1][3]).to.equal(4);
-    expect(results[2][3]).to.equal(6);
-  });
-  
-  it("should return column based on custom callback for test 2 in the right column position", function(){
-    var colSelectors = {
-      first: "tr td:nth-child(1)",
-      sum: function(window, currentRowIndex, fullElementArray){
-        console.log(currentRowIndex)
-        var element1 = fullElementArray[0][currentRowIndex], 
-            element2 = fullElementArray[1][currentRowIndex],
-            num1 = element1 ? element1.innerHTML : 0,
-            num2 = element2 ? element2.innerHTML : 0;
-        return num1 + num2; 
-      },
-      second: "tr td:nth-child(2)",
-    }
-    
-    var results = BaseScraper.scrapeHtml(htmlTest2, colSelectors);
-    
-    expect(results[0][2]).to.equal(2);
-    expect(results[1][2]).to.equal(4);
+    console.log(results)
+    expect(results[2][0]).to.equal(2);
+    expect(results[2][1]).to.equal(4);
     expect(results[2][2]).to.equal(6);
   });
   
