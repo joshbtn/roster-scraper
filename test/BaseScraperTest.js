@@ -17,7 +17,7 @@ var eaglesTest = {
         "document": fs.readFileSync(__dirname + "/assets/nfl_eagles.html").toString(),
         "dataSelector" : {
           "number" : "table tbody tr td.col-jersey",
-          "name" : "table tbody tr td.col-name",
+          "name" : "table tbody tr td.col-name a span",
           "position" : "table tbody tr td.col-position",
           "weight" : "table tbody tr td.col-weight",
           "height" : "table tbody tr td.col-height",
