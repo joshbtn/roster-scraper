@@ -7,6 +7,36 @@ var expect = require("chai").expect,
     htmlTest1 = fs.readFileSync(__dirname + "/assets/BaseScraper_Test1.html"),
     htmlTest2 = fs.readFileSync(__dirname + "/assets/BaseScraper_Test2.html");
 
+var eaglesTest = {
+  "team": [
+    {
+      "name": "Eagles",
+      "uri": "",
+      "roster": {
+        "uri": "",
+        "document": fs.readFileSync(__dirname + "/assets/nfl_eagles.html").toString(),
+        "dataSelector" : {
+          "number" : "table tbody tr td.col-jersey",
+          "name" : "table tbody tr td.col-name",
+          "position" : "table tbody tr td.col-position",
+          "weight" : "table tbody tr td.col-weight",
+          "height" : "table tbody tr td.col-height",
+          "age" : "table tbody tr td.col-bd",
+          "experience" : "table tbody tr td.col-exp",
+          "college" : "table tbody tr td.col-college",
+          "squad" : function(window, currentRowIndex, fullElementArray) {
+            var $ = window.$,
+                currentRow = "table tbody tr:eq(" + currentRowIndex + ")",
+                $squadHeader = $(currentRow).closest('h2');
+
+            return  "Active";
+          }
+        }
+      }
+    }
+  ]
+}
+
 describe("BaseScraper.scrapeHtml", function() {
   
   it("should return 3 rows of scraped data for test 1", function(){
@@ -64,45 +94,32 @@ describe("BaseScraper.getElementArray", function(){
   });
 });
 
+describe("baseScraper.getConfig", function() {
+  var scraper;
+  scraper = new BaseScraper(eaglesTest);
+  expect(typeof scraper.getConfig()).to.be.equal('object');
+  expect(Array.isArray(scraper.getConfig().team)).to.be.equal(true);
+  expect(scraper.getConfig().team.length).to.be.equal(1);
+});
+
+describe("baseScraper.setConfig", function() {
+  var scraper;
+  scraper = new BaseScraper();
+  scraper.setConfig(eaglesTest);
+  expect(typeof scraper.getConfig()).to.be.equal('object');
+});
+
 describe("baseScraper.scrape", function() {
-  it("should scrape the test eagles roster",function(){
+  it("should scrape the Eagles test roster",function(){
     var scrapper,
-        config = eaglesTest,
         data;
     
-      scrapper= new BaseScraper(config);
+      scrapper= new BaseScraper(eaglesTest);
       
       data = scrapper.scrape();
       
-      expect(false).to.equal(true)
+      expect(Array.isArray(data)).to.be.equal(true);
+      expect(data.length).to.be.above(2);
   });
 });
 
-var eaglesTest = {
-  "team": [
-    {
-      "name": "Eagles",
-      "uri": "",
-      "roster": {
-        "uri": "",
-        "document": fs.readFileSync(__dirname + "/assets/nfl_eagles.html"),
-        "dataSelector" : {
-          "number" : "table tbody tr td.col-jersey",
-          "name" : "table tbody tr td.col-name",
-          "position" : "table tbody tr td.col-position",
-          "weight" : "table tbody tr td.col-weight",
-          "height" : "table tbody tr td.col-height",
-          "age" : "table tbody tr td.col-bd",
-          "experience" : "table tbody tr td.col-exp",
-          "college" : "table tbody tr td.col-college",
-          "squad" : function($, currentElement, currentIndex, fullElementArray) {
-            var currentRow = "table tbody tr:eq(" + index + ")",
-                $squadHeader = $(currentRow).closest('h2');
-
-            return  $squadHeader.text();
-          }
-        }
-      }
-    }
-  ]
-}
