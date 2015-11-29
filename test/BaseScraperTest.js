@@ -117,7 +117,7 @@ describe("baseScraper.scrape", function() {
       scrapper= new BaseScraper(eaglesTest);
       
       data = scrapper.scrape();
-      
+      console.log(data); 
       expect(Array.isArray(data)).to.be.equal(true);
       expect(data.length).to.be.above(2);
   });
