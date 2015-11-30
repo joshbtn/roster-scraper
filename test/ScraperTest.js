@@ -3,9 +3,9 @@
 var expect = require("chai").expect,
     fs = require('fs'),
     Dom = require(__dirname + "/../lib/util/Dom.js"),
-    BaseScraper = require(__dirname + "/../lib/scraper/BaseScraper.js"),
-    htmlTest1 = fs.readFileSync(__dirname + "/assets/BaseScraper_Test1.html"),
-    htmlTest2 = fs.readFileSync(__dirname + "/assets/BaseScraper_Test2.html");
+    Scraper = require(__dirname + "/../lib/Scraper.js"),
+    htmlTest1 = fs.readFileSync(__dirname + "/assets/Scraper_Test1.html"),
+    htmlTest2 = fs.readFileSync(__dirname + "/assets/Scraper_Test2.html");
 
 var eaglesTest = {
   "team": [
@@ -37,7 +37,7 @@ var eaglesTest = {
   ]
 }
 
-describe("BaseScraper.scrapeHtml", function() {
+describe("Scraper.scrapeHtml", function() {
   
   it("should return 3 rows of scraped data for test 1", function(){
     var colSelectors = {
@@ -46,7 +46,7 @@ describe("BaseScraper.scrapeHtml", function() {
       memo: "tr td:nth-child(3)"
     }
     
-    var results = BaseScraper.scrapeHtml(htmlTest1, colSelectors);
+    var results = Scraper.scrapeHtml(htmlTest1, colSelectors);
     
     expect(results.length).to.equal(3);
   });
@@ -65,7 +65,7 @@ describe("BaseScraper.scrapeHtml", function() {
       }
     }
     
-    var results = BaseScraper.scrapeHtml(htmlTest2, colSelectors);
+    var results = Scraper.scrapeHtml(htmlTest2, colSelectors);
     
     expect(results[2][0]).to.equal(2);
     expect(results[2][1]).to.equal(4);
@@ -74,7 +74,7 @@ describe("BaseScraper.scrapeHtml", function() {
   
 });
 
-describe("BaseScraper.getElementArray", function(){
+describe("Scraper.getElementArray", function(){
   it("should get an element array for test1", function(){
     var colSelectors = {
       id: "tr td:nth-child(1)",
@@ -84,7 +84,7 @@ describe("BaseScraper.getElementArray", function(){
     };
     
     var window = Dom.getDomWithJquery(htmlTest1),
-        elementArray = BaseScraper.getElementArray(window, colSelectors);
+        elementArray = Scraper.getElementArray(window, colSelectors);
     
     expect(elementArray[0][2].innerHTML).to.equal('77de68daecd823babbb58edb1c8e14d7106e83bb');
     expect(elementArray[1].length).to.equal(3);
@@ -94,30 +94,30 @@ describe("BaseScraper.getElementArray", function(){
   });
 });
 
-describe("baseScraper.getConfig", function() {
+describe("scraper.getConfig", function() {
   var scraper;
-  scraper = new BaseScraper(eaglesTest);
+  scraper = new Scraper(eaglesTest);
   expect(typeof scraper.getConfig()).to.be.equal('object');
   expect(Array.isArray(scraper.getConfig().team)).to.be.equal(true);
   expect(scraper.getConfig().team.length).to.be.equal(1);
 });
 
-describe("baseScraper.setConfig", function() {
+describe("scraper.setConfig", function() {
   var scraper;
-  scraper = new BaseScraper();
+  scraper = new Scraper();
   scraper.setConfig(eaglesTest);
   expect(typeof scraper.getConfig()).to.be.equal('object');
 });
 
-describe("baseScraper.scrape", function() {
+describe("scraper.scrape", function() {
   it("should scrape the Eagles test roster",function(){
     var scrapper,
         data;
     
-      scrapper= new BaseScraper(eaglesTest);
+      scrapper= new Scraper(eaglesTest);
       
       data = scrapper.scrape();
-      console.log(data); 
+       
       expect(Array.isArray(data)).to.be.equal(true);
       expect(data.length).to.be.above(2);
   });
