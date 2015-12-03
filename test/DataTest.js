@@ -2,7 +2,7 @@
 
 var expect = require("chai").expect,
     fs = require('fs'),
-    Data = require(__dirname + "/../lib/util/Data.js");
+    Data = require(__dirname + "/../lib/Data.js");
 
 describe("Data.arrayAllEqual", function() {
   

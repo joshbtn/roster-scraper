@@ -2,8 +2,8 @@
 
 var expect = require("chai").expect,
     fs = require('fs'),
-    Dom = require(__dirname + "/../lib/util/Dom.js"),
-    Scraper = require(__dirname + "/../lib/Scraper.js"),
+    Dom = require(__dirname + "/../lib/Dom"),
+    Scraper = require(__dirname + "/../lib/Scraper"),
     htmlTest1 = fs.readFileSync(__dirname + "/assets/Scraper_Test1.html"),
     htmlTest2 = fs.readFileSync(__dirname + "/assets/Scraper_Test2.html");
 

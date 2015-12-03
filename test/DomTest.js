@@ -1,6 +1,6 @@
 var expect = require("chai").expect,
     fs = require('fs'),
-    Dom = require(__dirname + "/../lib/util/Dom.js");
+    Dom = require(__dirname + "/../lib/Dom.js");
 
 describe("Dom.getDomWithJquery", function() {
   
