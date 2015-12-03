@@ -1,5 +1,7 @@
 # roster-scraper
 
+[![Build Status](https://travis-ci.org/joshbtn/roster-scraper.svg)](https://travis-ci.org/joshbtn/roster-scraper)
+
 Roster scraper is a command line utility used to scrape the internet for player rosters.
 
 ## Install
