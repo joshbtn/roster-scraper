@@ -37,13 +37,16 @@ var eaglesTest = {
 describe("scraperService.Scrape", function() {
   var scrapeService = new ScrapeService(null);
   
-  var scraper = scrapeService.scrape(eaglesTest);
+  it("Should return results for the nfl eagles test", function(){
+    var scraper = scrapeService.scrape(eaglesTest);
   
-  scraper.scrape();
+    scraper.scrape();
+    
+    var data = scraper.getData();
+    
+    expect(data.length).to.be.equal(9);
+    expect(data[0]).to.not.equal(undefined);
+    expect(data[0].length).to.be.above(10);
+  })
   
-  var data = scraper.getData();
-  
-  expect(data.length).to.be.equal(9);
-  expect(data[0]).to.not.equal(undefined);
-  expect(data[0].length).to.be.above(10);
 });
