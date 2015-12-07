@@ -1,8 +1,8 @@
 'use strict';
 
-var expect = require("chai").expect,
-    fs = require('fs'),
-    ScrapeService = require(__dirname + '/../lib/ScrapeService');
+const expect = require("chai").expect;
+const fs = require('fs');
+const ScrapeService = require(__dirname + '/../lib/ScrapeService');
 
 var eaglesTest = {
   "team": [
