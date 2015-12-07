@@ -123,3 +123,17 @@ describe("scraper.scrape", function() {
   });
 });
 
+describe("scraper.getHeadings", function() {
+  it("should return the headings for the Eagles test roster",function(){
+    var scrapper,
+        data;
+    
+      scrapper= new Scraper(eaglesTest);
+      
+      data = scrapper.getHeadings(0);
+       
+      expect(Array.isArray(data)).to.be.equal(true);
+      expect(data.length).to.be.equal(9);
+  });
+});
+

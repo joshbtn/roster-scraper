@@ -1,5 +1,6 @@
 'use strict';
 
+
 const expect = require("chai").expect;
 const fs = require('fs');
 const OutputCsv = require(__dirname + "/../lib/OutputCsv.js");
@@ -35,16 +36,24 @@ var eaglesTest = {
   ]
 }
 
-describe("outputCsv", function() {
+describe("OutputCsv", function() {
   
   var scraper = new Scraper(eaglesTest);
-  var outputCsv = new OutputCsv(scraper);
   
-  describe("get", function(){
-      it("should return data formated as csv.", function(){
-        var actual = outputCsv.get();
-        expect(actual.length).to.be.above(1);
-      });
+  describe("#get()", function(){
+      
+      context("with a scraper set", function(){
+      
+        var outputCsv = new OutputCsv(scraper);
+        
+        it("should return data formated as csv.", function(){
+          var actual = outputCsv.get();
+          expect(actual.length).to.be.above(1);
+        });
+        
+        
+      })
+      
   })
  
 });
