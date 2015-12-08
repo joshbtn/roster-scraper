@@ -34,14 +34,12 @@ var eaglesTest = {
   ]
 }
 
-describe("scraperService.Scrape", function() {
+describe("scraperService.scrape", function() {
   var scrapeService = new ScrapeService(null);
   
   it("Should return results for the nfl eagles test", function(){
     var scraper = scrapeService.scrape(eaglesTest);
   
-    scraper.scrape();
-    
     var data = scraper.getData();
     
     expect(data.length).to.be.equal(9);
