@@ -2,7 +2,6 @@
 
 const ValidateScraper = require(__dirname + '/../lib/ValidateScraper');
 const expect = require('chai').expect;
-const fs = require('fs');
 const Scraper = require(__dirname + "/../lib/Scraper.js");
 
 var eaglesTest = {
@@ -12,7 +11,7 @@ var eaglesTest = {
       "uri": "",
       "roster": {
         "uri": "",
-        "document": fs.readFileSync(__dirname + "/assets/nfl_eagles.html").toString(),
+        "document": "",
         "dataSelector" : {
           "number" : "table tbody tr td.col-jersey",
           "name" : "table tbody tr td.col-name a span",
@@ -35,14 +34,147 @@ var eaglesTest = {
   ]
 };
 
+var twoTeamTest = {
+  "team": [
+    {
+      "name": "Eagles",
+      "uri": "",
+      "roster": {
+        "uri": "",
+        "document": "",
+        "dataSelector" : {
+          "number" : "table tbody tr td.col-jersey",
+          "name" : "table tbody tr td.col-name a span",
+          "position" : "table tbody tr td.col-position",
+          "weight" : "table tbody tr td.col-weight",
+          "height" : "table tbody tr td.col-height",
+          "age" : "table tbody tr td.col-bd",
+          "experience" : "table tbody tr td.col-exp",
+          "college" : "table tbody tr td.col-college"
+          
+        }
+      }
+    },
+    {
+      "name": "Seahawks",
+      "uri": "",
+      "roster": {
+        "uri": "",
+        "document": "",
+        "dataSelector" : {
+          "foo": "",
+          "number" : "table tbody tr td.col-jersey",
+          "name" : "table tbody tr td.col-name a span",
+          "position" : "table tbody tr td.col-position",
+          "weight" : "table tbody tr td.col-weight",
+          "height" : "table tbody tr td.col-height",
+          "age" : "table tbody tr td.col-bd",
+          "experience" : "table tbody tr td.col-exp",
+          "college" : "table tbody tr td.col-college"
+          
+        }
+      }
+    }
+  ]
+};
+
+var threeTeamTest = {
+  "team": [
+    {
+      "name": "Eagles",
+      "uri": "",
+      "roster": {
+        "uri": "",
+        "document": "",
+        "dataSelector" : {
+          "number" : "table tbody tr td.col-jersey",
+          "name" : "table tbody tr td.col-name a span",
+          "position" : "table tbody tr td.col-position",
+          "weight" : "table tbody tr td.col-weight",
+          "height" : "table tbody tr td.col-height",
+          "age" : "table tbody tr td.col-bd",
+          "experience" : "table tbody tr td.col-exp",
+          "college" : "table tbody tr td.col-college"
+          
+        }
+      }
+    },
+    {
+      "name": "Seahawks",
+      "uri": "",
+      "roster": {
+        "uri": "",
+        "document": "",
+        "dataSelector" : {
+          "number" : "table tbody tr td.col-jersey",
+          "name" : "table tbody tr td.col-name a span",
+          "position" : "table tbody tr td.col-position",
+          "weight" : "table tbody tr td.col-weight",
+          "height" : "table tbody tr td.col-height",
+          "age" : "table tbody tr td.col-bd",
+          "experience" : "table tbody tr td.col-exp",
+          "college" : "table tbody tr td.col-college"
+          
+        }
+      }
+    },
+    {
+      "name": "Bears",
+      "uri": "",
+      "roster": {
+        "uri": "",
+        "document": "",
+        "dataSelector" : {
+          "number" : "table tbody tr td.col-jersey",
+          "name" : "table tbody tr td.col-name a span",
+          "position" : "table tbody tr td.col-position",
+          "weight" : "table tbody tr td.col-weight",
+          "height" : "table tbody tr td.col-height",
+          "age" : "table tbody tr td.col-bd",
+          "experience" : "table tbody tr td.col-exp",
+          "college" : "table tbody tr td.col-college"
+          
+        }
+      }
+    }
+  ]
+};
+
 describe("ValidateScraper", function(){
    
-   var eaglesTestScraper = new Scraper(eaglesTest);
-   var validateScraper = new ValidateScraper(eaglesTestScraper);
    
-   it("should be true", function(){
-       var isValid = validateScraper.validate();
-       expect(isValid).to.be.true();
-   });
+   describe("#validate()", function(){
+     context("scraper with with 1 team", function(){
+       var eaglesTestScraper = new Scraper(eaglesTest);
+       var validateScraper = new ValidateScraper(eaglesTestScraper);
+        
+       it("should return true", function(){
+           var isValid = validateScraper.validate();
+           expect(isValid).to.be.equal(true);
+       });
+     })
+     
+     context("scraper with with 2 teams with missmatched columns", function(){
+       var testScraper = new Scraper(twoTeamTest);
+       var validateScraper = new ValidateScraper(testScraper);
+       
+       it("should return false", function(){
+           var isValid = validateScraper.validate();
+           expect(isValid).to.be.equal(false);
+       });
+     })
+     
+     context("scraper with with 3 teams with matching columns", function(){
+       var testScraper = new Scraper(threeTeamTest);
+       var validateScraper = new ValidateScraper(testScraper);
+       
+       it("should return true", function(){
+           var isValid = validateScraper.validate();
+           expect(isValid).to.be.equal(true);
+       });
+     })
+   })
+   
+   
    
 });
