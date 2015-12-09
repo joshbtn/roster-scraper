@@ -36,8 +36,9 @@ var eaglesTest = {
 };
 
 describe("ValidateScraper", function(){
+   
    var eaglesTestScraper = new Scraper(eaglesTest);
-   var validateScraper = new ValidateScraper(eaglesTestScraper); 
+   var validateScraper = new ValidateScraper(eaglesTestScraper);
    
    it("should be true", function(){
        var isValid = validateScraper.validate();
