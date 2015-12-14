@@ -143,7 +143,7 @@ var threeTeamTest = {
 describe("ValidateScraper", function(){
    
    
-   describe("#validate()", function(){
+   describe("validate()", function(){
      context("scraper with with 1 team", function(){
        var eaglesTestScraper = new Scraper(eaglesTest);
        var validateScraper = new ValidateScraper(eaglesTestScraper);
@@ -175,6 +175,26 @@ describe("ValidateScraper", function(){
      })
    })
    
+   describe("getScraper()", function() {
+       var eaglesTestScraper = new Scraper(eaglesTest);
+       var validateScraper = new ValidateScraper(eaglesTestScraper);
+       
+       it("should successfully get the scraper object", function(){
+         var scraper = validateScraper.getScraper();
+         expect(typeof scraper).to.be.equal('object');
+       });
+   });
    
+   describe("setScraper()", function() {
+      var eaglesTestScraper = new Scraper(eaglesTest);
+      var validateScraper = new ValidateScraper();
+      
+      it("should successfully set the scraper object", function(){
+         validateScraper.setScraper(eaglesTestScraper);
+         expect(typeof scraper).to.be.equal('undefined');
+         var scraper = validateScraper.getScraper();
+         expect(typeof scraper).to.be.equal('object');
+      });
+   });
    
 });
