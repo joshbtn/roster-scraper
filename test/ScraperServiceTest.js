@@ -34,17 +34,24 @@ var eaglesTest = {
   ]
 }
 
-describe("scraperService.scrape", function() {
-  var scrapeService = new ScrapeService(null);
+describe("ScraperService", function() {
   
-  it("Should return results for the nfl eagles test", function(){
-    var scraper = scrapeService.scrape(eaglesTest);
-  
-    var data = scraper.getData();
-    
-    expect(data.length).to.be.equal(9);
-    expect(data[0]).to.not.equal(undefined);
-    expect(data[0].length).to.be.above(10);
+  describe("scrape()", function() {
+      context("with no output", function(){
+        
+        var noOutput = null;
+        var scrapeService = new ScrapeService(noOutput);
+        
+        it("Should return expected data array for the nfl eagles test", function(){
+          var scraper = scrapeService.scrape(eaglesTest);
+        
+          var data = scraper.getData();
+          
+          expect(data.length).to.be.equal(9);
+          expect(data[0]).to.not.equal(undefined);
+          expect(data[0].length).to.be.above(10);
+        })
+      });
   })
   
 });
