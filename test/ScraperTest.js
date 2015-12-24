@@ -24,12 +24,13 @@ var eaglesTest = {
           "age" : "table tbody tr td.col-bd",
           "experience" : "table tbody tr td.col-exp",
           "college" : "table tbody tr td.col-college",
-          "squad" : function(window, currentRowIndex, fullElementArray) {
-            var $ = window.$,
-                currentRow = "table tbody tr:eq(" + currentRowIndex + ")",
+          "squad" : function($, currentRowIndex, fullElementArray) {
+            var rows = $("table tbody tr"),
+                currentRow = rows.eq(currentRowIndex),//:eq(" + currentRowIndex + ")",
                 $squadHeader = $(currentRow).closest('h2');
-
-            return  "Active";
+            //console.log($squadHeader)
+            return  Dom.getTextNodesIn($squadHeader).text();
+            //return "active";
           }
         }
       }
@@ -84,8 +85,8 @@ describe("Scraper", function() {
         memo: "tr td:nth-child(3)"
       };
       
-      var window = Dom.getDomWithJquery(htmlTest1),
-          elementArray = Scraper.getElementArray(window, colSelectors);
+      var $ = Dom.getDom(htmlTest1),
+          elementArray = Scraper.getElementArray($, colSelectors);
       
       expect(elementArray[0][2].innerHTML).to.equal('77de68daecd823babbb58edb1c8e14d7106e83bb');
       expect(elementArray[1].length).to.equal(3);
@@ -124,7 +125,10 @@ describe("Scraper", function() {
         data = scrapper.scrape();
          
         expect(Array.isArray(data)).to.be.equal(true);
-        expect(data.length).to.be.above(2);
+        expect(data.length).to.be.equal(9);
+        expect(data[7].length).to.be.equal(68);
+        expect(data[8].length).to.be.equal(68);
+        expect(data[8][0].toString().toLowerCase()).to.be.equal("active");
     });
   });
   

@@ -17,9 +17,8 @@ var nfl = {
           "age" : "table tbody tr td.col-bd",
           "experience" : "table tbody tr td.col-exp",
           "college" : "table tbody tr td.col-college",
-          "squad" : function(window, currentRowIndex, fullElementArray) {
-            var $ = window.$,
-                currentRow = "table tbody tr:eq(" + currentRowIndex + ")",
+          "squad" : function($, currentRowIndex, fullElementArray) {
+            var currentRow = "table tbody tr:eq(" + currentRowIndex + ")",
                 $squadHeader = $(currentRow).closest('h2');
 
             return  $squadHeader[0].innerHTML;
