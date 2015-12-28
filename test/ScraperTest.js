@@ -26,12 +26,13 @@ var eaglesTest = {
           "experience" : "table tbody tr td.col-exp",
           "college" : "table tbody tr td.col-college",
           "squad" : function($, currentRowIndex, fullElementArray) {
-            //var rows = $("table tbody tr"),
-            //    currentRow = rows.eq(currentRowIndex),//:eq(" + currentRowIndex + ")",
-            //    $squadHeader = $(currentRow).closest('h2');
-            //console.log($squadHeader)
-            //return  Dom.getTextNodesIn($squadHeader).text();
-            return "active";
+            var rows = $("table tbody tr"),
+                currentRow = rows.eq(currentRowIndex),//:eq(" + currentRowIndex + ")",
+                table = $(currentRow).closest('table'),
+                squadHeader = $(table).prevAll('.mod-title-nobackground').find('h2'),
+                squad = Dom.getTextNodesIn(squadHeader).text();
+            
+            return  squad;
           }
         }
       }

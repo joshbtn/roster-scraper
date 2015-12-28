@@ -1,6 +1,7 @@
 'use strict';
 
 const expect = require("chai").expect;
+const Dom = require(__dirname + "/../lib/Dom");
 const fs = require('fs');
 const ScrapeService = require(__dirname + '/../lib/ScrapeService');
 
@@ -21,12 +22,14 @@ var eaglesTest = {
           "age" : "table tbody tr td.col-bd",
           "experience" : "table tbody tr td.col-exp",
           "college" : "table tbody tr td.col-college",
-          "squad" : function(window, currentRowIndex, fullElementArray) {
-            var $ = window.$,
-                currentRow = "table tbody tr:eq(" + currentRowIndex + ")",
-                $squadHeader = $(currentRow).closest('h2');
-
-            return  "Active";
+          "squad" : function($, currentRowIndex, fullElementArray) {
+            var rows = $("table tbody tr"),
+                currentRow = rows.eq(currentRowIndex),//:eq(" + currentRowIndex + ")",
+                table = $(currentRow).closest('table'),
+                squadHeader = $(table).prevAll('.mod-title-nobackground').find('h2'),
+                squad = Dom.getTextNodesIn(squadHeader).text();
+            
+            return  squad;
           }
         }
       }
