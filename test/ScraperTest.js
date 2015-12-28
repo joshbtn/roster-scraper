@@ -116,20 +116,58 @@ describe("Scraper", function() {
   });
   
   describe("scrape()", function() {
-    it("should scrape the Eagles test roster",function(){
+    context("eagles test roster", function(){
       var scrapper,
           data;
+    
+      scrapper= new Scraper(eaglesTest);
       
-        scrapper= new Scraper(eaglesTest);
-        
-        data = scrapper.scrape();
-         
+      data = scrapper.scrape();
+      
+      it("should return 9 columns",function(){
         expect(Array.isArray(data)).to.be.equal(true);
         expect(data.length).to.be.equal(9);
+        //number, name, position, weight, height, age, experience, college, squad
+        
+        //expect(data[8][0].toString().toLowerCase()).to.be.equal("active");
+      });
+      
+      it("should return 68 number rows", function(){
+        expect(data[0].length).to.be.equal(68);
+      });
+      
+      it("should return 68 name rows", function(){
+        expect(data[1].length).to.be.equal(68);
+      });
+      
+      it("should return 68 position rows", function(){
+        expect(data[2].length).to.be.equal(68);
+      });
+      
+      it("should return 68 weight rows", function(){
+        expect(data[3].length).to.be.equal(68);
+      });
+      
+      it("should return 68 height rows", function(){
+        expect(data[4].length).to.be.equal(68);
+      });
+      
+      it("should return 68 age rows", function(){
+        expect(data[5].length).to.be.equal(68);
+      });
+      
+      it("should return 68 experience rows", function(){
+        expect(data[6].length).to.be.equal(68);
+      });
+      
+      it("should return 68 college rows", function(){
         expect(data[7].length).to.be.equal(68);
+      });
+      
+      it("should return 68 squad rows", function(){
         expect(data[8].length).to.be.equal(68);
-        expect(data[8][0].toString().toLowerCase()).to.be.equal("active");
-    });
+      });
+    })
   });
   
   describe("getHeadings()", function() {
