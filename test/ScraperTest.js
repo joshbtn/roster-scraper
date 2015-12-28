@@ -29,8 +29,8 @@ var eaglesTest = {
                 currentRow = rows.eq(currentRowIndex),//:eq(" + currentRowIndex + ")",
                 $squadHeader = $(currentRow).closest('h2');
             //console.log($squadHeader)
-            return  Dom.getTextNodesIn($squadHeader).text();
-            //return "active";
+            //return  Dom.getTextNodesIn($squadHeader).text();
+            return "active";
           }
         }
       }
@@ -57,11 +57,12 @@ describe("Scraper", function() {
       var colSelectors = {
         first: "tr td:nth-child(1)",
         second: "tr td:nth-child(2)",
-        sum: function(window, currentRowIndex, fullElementArray){
-          var elementFirst = fullElementArray[0][currentRowIndex],
-              elementSecond = fullElementArray[1][currentRowIndex],
-              numFirst = parseInt(elementFirst.innerHTML),
-              numSecond = parseInt(elementSecond.innerHTML);
+        sum: function($, currentRowIndex, fullElementArray){
+          
+          var elementFirst = $(fullElementArray[0][currentRowIndex]),
+              elementSecond = $(fullElementArray[1][currentRowIndex]),
+              numFirst = parseInt(elementFirst.text()),
+              numSecond = parseInt(elementSecond.text());
           
           return numFirst + numSecond; 
         }
@@ -88,7 +89,7 @@ describe("Scraper", function() {
       var $ = Dom.getDom(htmlTest1),
           elementArray = Scraper.getElementArray($, colSelectors);
       
-      expect(elementArray[0][2].innerHTML).to.equal('77de68daecd823babbb58edb1c8e14d7106e83bb');
+      expect($(elementArray[0][2]).text()).to.equal('77de68daecd823babbb58edb1c8e14d7106e83bb');
       expect(elementArray[1].length).to.equal(3);
       expect(typeof elementArray[2]).to.equal('function');
       expect(elementArray[3].length).to.equal(3);
@@ -129,7 +130,7 @@ describe("Scraper", function() {
         expect(data.length).to.be.equal(9);
         //number, name, position, weight, height, age, experience, college, squad
         
-        //expect(data[8][0].toString().toLowerCase()).to.be.equal("active");
+        
       });
       
       it("should return 68 number rows", function(){
@@ -167,7 +168,11 @@ describe("Scraper", function() {
       it("should return 68 squad rows", function(){
         expect(data[8].length).to.be.equal(68);
       });
-    })
+      
+      it("should return active for the first row in the squad col.", function(){
+        expect(data[8][0].toString().toLowerCase()).to.be.equal("active");
+      });
+    });
   });
   
   describe("getHeadings()", function() {
