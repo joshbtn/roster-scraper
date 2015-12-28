@@ -3,9 +3,10 @@
 var expect = require("chai").expect,
     fs = require('fs'),
     Dom = require(__dirname + "/../lib/Dom"),
+    Data = require(__dirname + "/../lib/Data"),
     Scraper = require(__dirname + "/../lib/Scraper"),
-    htmlTest1 = fs.readFileSync(__dirname + "/assets/Scraper_Test1.html"),
-    htmlTest2 = fs.readFileSync(__dirname + "/assets/Scraper_Test2.html");
+    htmlTest1 = fs.readFileSync(__dirname + "/assets/Scraper_Test1.html").toString(),
+    htmlTest2 = fs.readFileSync(__dirname + "/assets/Scraper_Test2.html").toString();
 
 var eaglesTest = {
   "team": [
@@ -25,9 +26,9 @@ var eaglesTest = {
           "experience" : "table tbody tr td.col-exp",
           "college" : "table tbody tr td.col-college",
           "squad" : function($, currentRowIndex, fullElementArray) {
-            var rows = $("table tbody tr"),
-                currentRow = rows.eq(currentRowIndex),//:eq(" + currentRowIndex + ")",
-                $squadHeader = $(currentRow).closest('h2');
+            //var rows = $("table tbody tr"),
+            //    currentRow = rows.eq(currentRowIndex),//:eq(" + currentRowIndex + ")",
+            //    $squadHeader = $(currentRow).closest('h2');
             //console.log($squadHeader)
             //return  Dom.getTextNodesIn($squadHeader).text();
             return "active";
@@ -37,6 +38,7 @@ var eaglesTest = {
     }
   ]
 }
+
 describe("Scraper", function() {
       
   describe("#scrapeHtml()", function() {
@@ -73,6 +75,52 @@ describe("Scraper", function() {
       expect(results[2][0]).to.equal(2);
       expect(results[2][1]).to.equal(4);
       expect(results[2][2]).to.equal(6);
+    });
+    
+    it("should pass $ to callbacks as a function", function(done){
+      var colSelectors = {
+        dummy: "tr th:nth-child(1)",
+        callback: function($,  currentRowIndex, normalizedElementArray){
+          expect($).to.be.a('function');
+          var rowCount = Data.getRowCount(normalizedElementArray);
+          if(currentRowIndex === rowCount - 1){
+            done();
+          }
+        }
+      };
+      
+      var results = Scraper.scrapeHtml(htmlTest1, colSelectors);
+    });
+    
+    it("should pass currentRowIndex to callbacks as a number", function(done){
+      var colSelectors = {
+        dummy: "tr th:nth-child(1)",
+        callback: function($,  currentRowIndex, fullElementArray){
+          expect(currentRowIndex).to.be.a('number');
+          var rowCount = Data.getRowCount(fullElementArray);
+          if(currentRowIndex === rowCount - 1){
+            done();
+          }
+        }
+      }
+      
+      var results = Scraper.scrapeHtml(htmlTest1, colSelectors);
+    });
+    
+    it("should pass currentRowIndex to callbacks as an array", function(done){
+      var colSelectors = {
+        dummy: "tr th:nth-child(1)",
+        callback: function($,  currentRowIndex, fullElementArray){
+          var isArray = Array.isArray(fullElementArray);
+          expect(isArray).to.be.equal(true);
+          var rowCount = Data.getRowCount(fullElementArray);
+          if(currentRowIndex === rowCount - 1){
+            done();
+          }
+        }
+      }
+      
+      var results = Scraper.scrapeHtml(htmlTest1, colSelectors);
     });
     
   });
@@ -128,9 +176,6 @@ describe("Scraper", function() {
       it("should return 9 columns",function(){
         expect(Array.isArray(data)).to.be.equal(true);
         expect(data.length).to.be.equal(9);
-        //number, name, position, weight, height, age, experience, college, squad
-        
-        
       });
       
       it("should return 68 number rows", function(){
