@@ -15,12 +15,6 @@ describe("OutputCsv", function() {
       
         var outputCsv = new OutputCsv(scraper);
         
-        it("should return data formated as csv.", function(){
-          var actual = outputCsv.get();
-          expect(actual.length).to.be.above(1);
-        });
-        
-        
       })
       
   })
