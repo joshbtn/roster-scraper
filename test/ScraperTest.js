@@ -1,44 +1,13 @@
 'use strict';
 
-var expect = require("chai").expect,
-    fs = require('fs'),
-    Dom = require(__dirname + "/../lib/Dom"),
-    Data = require(__dirname + "/../lib/Data"),
-    Scraper = require(__dirname + "/../lib/Scraper"),
-    htmlTest1 = fs.readFileSync(__dirname + "/assets/Scraper_Test1.html").toString(),
-    htmlTest2 = fs.readFileSync(__dirname + "/assets/Scraper_Test2.html").toString();
-
-var eaglesTest = {
-  "team": [
-    {
-      "name": "Eagles",
-      "uri": "",
-      "roster": {
-        "uri": "",
-        "document": fs.readFileSync(__dirname + "/assets/nfl_eagles.html").toString(),
-        "dataSelector" : {
-          "number" : "table tbody tr td.col-jersey",
-          "name" : "table tbody tr td.col-name a span",
-          "position" : "table tbody tr td.col-position",
-          "weight" : "table tbody tr td.col-weight",
-          "height" : "table tbody tr td.col-height",
-          "age" : "table tbody tr td.col-bd",
-          "experience" : "table tbody tr td.col-exp",
-          "college" : "table tbody tr td.col-college",
-          "squad" : function($, currentRowIndex, fullElementArray) {
-            var rows = $("table tbody tr"),
-                currentRow = rows.eq(currentRowIndex),//:eq(" + currentRowIndex + ")",
-                table = $(currentRow).closest('table'),
-                squadHeader = $(table).prevAll('.mod-title-nobackground').find('h2'),
-                squad = Dom.getTextNodesIn(squadHeader).text();
-            
-            return  squad;
-          }
-        }
-      }
-    }
-  ]
-}
+const expect = require("chai").expect;
+const fs = require('fs');
+const Dom = require(__dirname + "/../lib/Dom");
+const Data = require(__dirname + "/../lib/Data");
+const Scraper = require(__dirname + "/../lib/Scraper");
+const htmlTest1 = fs.readFileSync(__dirname + "/assets/Scraper_Test1.html").toString();
+const htmlTest2 = fs.readFileSync(__dirname + "/assets/Scraper_Test2.html").toString();
+let eaglesTest = require(__dirname + "/helpers/EaglesTestConfig");
 
 describe("Scraper", function() {
       

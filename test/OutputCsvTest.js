@@ -3,7 +3,7 @@
 const expect = require("chai").expect;
 const OutputCsv = require(__dirname + "/../lib/OutputCsv.js");
 const Scraper = require(__dirname + "/../lib/Scraper.js");
-let eaglesTest = require("./helpers/EaglesTestConfig")
+let eaglesTest = require(__dirname + "/helpers/EaglesTestConfig");
 
 describe("OutputCsv", function() {
   
