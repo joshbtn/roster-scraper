@@ -1,13 +1,16 @@
 'use strict';
 
-var nfl = {
+const fs = require('fs');
+const Dom = require(__dirname + "/../../lib/Dom");
+
+module.exports = {
   "team": [
     {
       "name": "Eagles",
-      "uri": "http://www.philadelphiaeagles.com/",
+      "uri": "",
       "roster": {
-        "uri": "http://www.philadelphiaeagles.com/team/roster.html",
-        "document": "",
+        "uri": "",
+        "document": fs.readFileSync(__dirname + "/../assets/nfl_eagles.html").toString(),
         "dataSelector" : {
           "number" : "table tbody tr td.col-jersey",
           "name" : "table tbody tr td.col-name a span",
@@ -18,16 +21,16 @@ var nfl = {
           "experience" : "table tbody tr td.col-exp",
           "college" : "table tbody tr td.col-college",
           "squad" : function($, currentRowIndex, fullElementArray) {
-            var currentRow = "table tbody tr:eq(" + currentRowIndex + ")",
-                $squadHeader = $(currentRow).closest('h2');
-
-            return  $squadHeader[0].innerHTML;
+            var rows = $("table tbody tr"),
+                currentRow = rows.eq(currentRowIndex),//:eq(" + currentRowIndex + ")",
+                table = $(currentRow).closest('table'),
+                squadHeader = $(table).prevAll('.mod-title-nobackground').find('h2'),
+                squad = Dom.getTextNodesIn(squadHeader).text();
+            
+            return  squad;
           }
-
         }
       }
     }
   ]
 }
-
-module.exports = nfl;

@@ -1,0 +1,8 @@
+{
+  "undef": true,
+  "unused": "vars",
+  "node": true,
+  "esnext": true,
+  //"esversion": 6,
+  "predef": ["context" ]
+}
