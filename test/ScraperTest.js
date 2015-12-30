@@ -5,6 +5,7 @@ const fs = require('fs');
 const Dom = require(__dirname + "/../lib/Dom");
 const Data = require(__dirname + "/../lib/Data");
 const Scraper = require(__dirname + "/../lib/Scraper");
+const Table = require(__dirname + "/../lib/Table");
 const htmlTest1 = fs.readFileSync(__dirname + "/assets/Scraper_Test1.html").toString();
 const htmlTest2 = fs.readFileSync(__dirname + "/assets/Scraper_Test2.html").toString();
 let eaglesTest = require(__dirname + "/helpers/EaglesTestConfig");
@@ -143,8 +144,11 @@ describe("Scraper", function() {
       
       data = scrapper.scrape();
       
+      it("should return a Table",function(){
+        expect(Table.isTable(data)).to.be.equal(true);
+      });
+      
       it("should return 9 columns",function(){
-        expect(Array.isArray(data)).to.be.equal(true);
         expect(data.length).to.be.equal(9);
       });
       
