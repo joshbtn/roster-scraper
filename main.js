@@ -1,10 +1,8 @@
 #!/usr/bin/env node
 
 var 
-    http = require('http'),
     docopt = require('docopt').docopt,
-    scraper = require('lib/scraper'),
-    rosters = {};
+    ScrapeService = require( __dirname + '/lib/ScrapeService.js');
 
 var doc =
 "Usage:\n\
@@ -19,13 +17,12 @@ Options:\n\
 var options = docopt(doc, {help: true, version: getVersion()});
 
 function getVersion(){
-  var pjson = require('../package.json');
+  var pjson = require('./package.json');
   return pjson.version
 };
 
-
-var currentTeamIndex;
-var currentTeam;
-var scraper = Scrape(options["--roster"]);
+var rosterName = options["--roster"].toString();
+var scrapeService = new ScrapeService(rosterName, null);
+console.log( scrapeService.scrape().getData() );
 
 
