@@ -41,11 +41,8 @@ describe("OutputCsv", function() {
           
           let outputCsv = new OutputCsv(scraper, {path: __dirname + "/OutPutCsvText.csv"});
           
-          try{
-            fs.unlink(outputCsv.getPath(), function(err){if(err){}});
-          } catch (ex) {
-            console.warn(__dirname + "/OutPutCsvText.csv not found")
-          }
+          
+          fs.unlink(outputCsv.getPath(), function(err){if(err){}});
           
           outputCsv.on('done', function(){
             var isFile = fs.statSync(outputCsv.getPath()).isFile();
