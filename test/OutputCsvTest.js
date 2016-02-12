@@ -41,11 +41,11 @@ describe("OutputCsv", function() {
           
           let outputCsv = new OutputCsv(scraper, {path: __dirname + "/OutPutCsvText.csv"});
           
-          var isFile = fs.statSync(outputCsv.getPath()).isFile();
+          //var isFile = fs.statSync(outputCsv.getPath()).isFile();
           
-          if(isFile){
-            fs.unlink(outputCsv.getPath(), function(err){if(err){}});
-          }
+          //if(isFile){
+          //  fs.unlink(outputCsv.getPath(), function(err){if(err){}});
+          //}
           
           outputCsv.on('done', function(){
             var isFile = fs.statSync(outputCsv.getPath()).isFile();
