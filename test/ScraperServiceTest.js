@@ -41,7 +41,7 @@ describe("ScraperService", function() {
             var scraper = scrapeService.scrape();
             var data = scraper.getData();
             
-            expect(data.length).to.be.equal(9);
+            expect(data.length).to.be.equal(10);
             expect(data[0]).to.not.equal(undefined);
             expect(data[0].length).to.be.above(10);
             next();
