@@ -23,6 +23,10 @@ function getVersion(){
 
 var rosterName = options["--roster"].toString();
 var scrapeService = new ScrapeService(rosterName, null);
-console.log( scrapeService.scrape().getData() );
+scrapeService.load();
+
+scrapeService.on('load', function(){
+  console.log( scrapeService.scrape().getData() );
+})
 
 

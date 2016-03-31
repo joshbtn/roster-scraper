@@ -11,21 +11,18 @@ describe("OutputCsv", function() {
   
   describe("#get()", function(){
       
-      context("basic set data test", function(){
-        let scraper = new Scraper();
+    let scraper = new Scraper();
+    
+    it('should return expected CsvString', function(){
+      let table = new Table();
+      table.push([1,4,7],[2,5,8],[3,6,9])
+      scraper.setData(table);
+      let outputCsv = new OutputCsv(scraper);
+      let csvString = outputCsv.get();
+    
+      expect(csvString).to.be.equal("1,2,3\n4,5,6\n7,8,9");
+    });
         
-        it('should return expected CsvString', function(){
-          let table = new Table();
-          table.push([1,4,7],[2,5,8],[3,6,9])
-          scraper.setData(table);
-          let outputCsv = new OutputCsv(scraper);
-          let csvString = outputCsv.get();
-        
-          expect(csvString).to.be.equal("1,2,3\n4,5,6\n7,8,9");
-        });
-        
-      });
-      
   });
   
   describe("#write()", function(){

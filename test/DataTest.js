@@ -127,22 +127,21 @@ describe("Data", function() {
       });
       
     });
-    
-    context("all error conditions", function(){
-      it("should throw an error", function() {
-        var invalidObject = Data.getRowCount.bind(null,{}),
-            invalidArray1 = Data.getRowCount.bind(null,[]),
-            invalidArray2 = Data.getRowCount.bind(null,[{}, {}]),
-            invalidArray3 = Data.getRowCount.bind(null,[function(){}]),
-            invalidFunction = Data.getRowCount.bind(null,function(){});
-            
-        expect(invalidObject).to.throw(Error);
-        expect(invalidArray1).to.throw(Error);
-        expect(invalidArray2).to.throw(Error);
-        expect(invalidArray3).to.throw(Error);
-        expect(invalidFunction).to.throw(Error);
-      });
+  
+    it("all error conditions should throw an error", function() {
+      var invalidObject = Data.getRowCount.bind(null,{}),
+          invalidArray1 = Data.getRowCount.bind(null,[]),
+          invalidArray2 = Data.getRowCount.bind(null,[{}, {}]),
+          invalidArray3 = Data.getRowCount.bind(null,[function(){}]),
+          invalidFunction = Data.getRowCount.bind(null,function(){});
+          
+      expect(invalidObject).to.throw(Error);
+      expect(invalidArray1).to.throw(Error);
+      expect(invalidArray2).to.throw(Error);
+      expect(invalidArray3).to.throw(Error);
+      expect(invalidFunction).to.throw(Error);
     });
+    
     
   });
 

@@ -40,9 +40,6 @@ describe("ScraperService", function() {
           scrapeService.on('load', function(){
             var scraper = scrapeService.scrape();
             var data = scraper.getData();
-            //let outputCsv = new OutputCsv(scraper, {path: __dirname + "/OutPutCsvText.csv"});
-            //outputCsv.write();
-            //throw "output needs fixn'"
             
             expect(data.length).to.be.equal(9);
             expect(data[0]).to.not.equal(undefined);
