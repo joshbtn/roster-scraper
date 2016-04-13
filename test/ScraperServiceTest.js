@@ -13,7 +13,7 @@ describe("ScraperService", function() {
       context("with no output", function(){
         
         var noOutput = null;
-        var scrapeService = new ScrapeService(eaglesTest, noOutput);
+        var scrapeService = new ScrapeService(eaglesTest);
         
         it("Should return expected data array for the nfl eagles test", function(){
           var scraper = scrapeService.scrape();
