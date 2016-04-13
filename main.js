@@ -12,6 +12,8 @@ var doc =
 Options:\n\
   -h --help        Show this screen.\n\
   --roster ROSTER  Name of the roster module you would like to scrape.\n\
+  --format FORMAT  'csv' or 'json'.\n\
+  --path   path    Path for output
   --version        Get version information";
 
 var options = docopt(doc, {help: true, version: getVersion()});
@@ -22,7 +24,21 @@ function getVersion(){
 };
 
 var rosterName = options["--roster"].toString();
-var scrapeService = new ScrapeService(rosterName, null);
+var format = options["--format"].toString();
+var path = options["--path"].toString();
+
+
+var output = null;
+var scrapeService = new ScrapeService(rosterName);
+
+var initOutput = {
+  "csv": function(){
+    output = new OutputCsv(scrapeService)
+  }
+}
+
+initOutput[format]();
+
 scrapeService.load();
 
 scrapeService.on('load', function(){
