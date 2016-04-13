@@ -13,7 +13,7 @@ Options:\n\
   -h --help        Show this screen.\n\
   --roster ROSTER  Name of the roster module you would like to scrape.\n\
   --format FORMAT  'csv' or 'json'.\n\
-  --path   path    Path for output
+  --path   path    Path for output\n\
   --version        Get version information";
 
 var options = docopt(doc, {help: true, version: getVersion()});
@@ -33,7 +33,7 @@ var scrapeService = new ScrapeService(rosterName);
 
 var initOutput = {
   "csv": function(){
-    output = new OutputCsv(scrapeService)
+    output = new OutputCsv(scrapeService.getScraper())
   }
 }
 
