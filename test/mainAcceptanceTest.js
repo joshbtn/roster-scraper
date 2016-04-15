@@ -24,7 +24,8 @@ function expectStdoutToContain(callback, expected){
 
 describe("ndoe main.js --roster NFL --output json", function() {
     it("should return a json object", function(done){
-        var text = "ocho";
-        exec("node main.js -c rosters/NFL.js", expectStdoutToEqual(done, text));
+        var text = "Loading roster module";
+        var configPath = __dirname + '/../../rosters/NFL.js';
+        exec("node main.js --config " + configPath + " --format JSON", expectStdoutToContain(done, text));
     });
 });

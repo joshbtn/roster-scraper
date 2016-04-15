@@ -6,15 +6,15 @@ var
 
 var doc =
 "Usage:\n\
-  main.js --roster ROSTER\n\
+  main.js --config CONFIG --format FORMAT [--path PATH]\n\
   main.js -h | --help\n\
   main.js --version\n\
 Options:\n\
   -h --help        Show this screen.\n\
-  --roster ROSTER  Name of the roster module you would like to scrape.\n\
-  --format FORMAT  'csv' or 'json'.\n\
-  --path   path    Path for output\n\
-  --version        Get version information";
+  -c --config CONFIG  Path of the roster module you would like to scrape.\n\
+  -f --format FORMAT  'csv' or 'json'.\n\
+  -p --path   PATH    Path for output\n\
+  -v --version        Get version information";
 
 var options = docopt(doc, {help: true, version: getVersion()});
 
