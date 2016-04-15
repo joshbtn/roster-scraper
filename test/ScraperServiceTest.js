@@ -31,8 +31,8 @@ describe("ScraperService", function() {
       context("with no output", function(){
         
         var noOutput = null;
-        
-        var scrapeService = new ScrapeService('NFL', noOutput);
+        var rosterConfigPath = __dirname + '/../rosters/NFL.js';
+        var scrapeService = new ScrapeService(rosterConfigPath, noOutput);
         
         it("Should return expected data array for the nfl eagles test", function(next){
           scrapeService.load();

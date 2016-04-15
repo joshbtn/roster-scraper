@@ -23,13 +23,13 @@ function getVersion(){
   return pjson.version
 };
 
-var rosterName = options["--roster"].toString();
+var config = options["--config"].toString();
 var format = options["--format"].toString();
 var path = options["--path"].toString();
 
 
 var output = null;
-var scrapeService = new ScrapeService(rosterName);
+var scrapeService = new ScrapeService(config);
 
 var initOutput = {
   "csv": function(){
