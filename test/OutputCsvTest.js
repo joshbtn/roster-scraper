@@ -36,7 +36,7 @@ describe("OutputCsv", function() {
           
           scraper.setData(table);
           
-          let outputCsv = new OutputCsv(scraper, {path: __dirname + "/OutPutCsvText.csv"});
+          let outputCsv = new OutputCsv(scraper,__dirname + "/OutPutCsvText.csv");
           
           //var isFile = fs.statSync(outputCsv.getPath()).isFile();
           
