@@ -1,31 +1,54 @@
 #!/usr/bin/env node
 
 var 
-    http = require('http'),
     docopt = require('docopt').docopt,
-    scraper = require('lib/scraper'),
-    rosters = {};
+    ScrapeService = require( __dirname + '/lib/ScrapeService.js'),
+    OutputCsv = require( __dirname + '/lib/OutputCsv.js');
 
 var doc =
 "Usage:\n\
-  main.js --roster ROSTER\n\
+  main.js --config CONFIG --format FORMAT --out OUT\n\
   main.js -h | --help\n\
   main.js --version\n\
 Options:\n\
   -h --help        Show this screen.\n\
-  --roster ROSTER  Name of the roster module you would like to scrape.\n\
-  --version        Get version information";
+  -c --config   CONFIG  Path of the roster module you would like to scrape.\n\
+  -f --format   FORMAT  'csv' or 'json'.\n\
+  -o --out    OUT    Path for output\n\
+  -v --version        Get version information";
 
 var options = docopt(doc, {help: true, version: getVersion()});
 
 function getVersion(){
-  var pjson = require('../package.json');
+  var pjson = require('./package.json');
   return pjson.version
 };
 
+var config = options["CONFIG"].toString();
+var format = options["FORMAT"].toString();
+var path = options["OUT"].toString();
 
-var currentTeamIndex;
-var currentTeam;
-var scraper = Scrape(options["--roster"]);
+
+var output = null;
+var scrapeService = new ScrapeService(config);
+
+var initOutput = {
+  "csv": function(){
+    output = new OutputCsv(scrapeService.getScraper(), path)
+  },
+  "json": function(){
+    throw "not implimented"
+  }
+}
+
+initOutput[format.toString().toLowerCase()]();
+
+scrapeService.load();
+
+scrapeService.on('load', function(){
+  //console.log( scrapeService.scrape().getData() );
+  console.log( "Done." );
+  output.write();
+})
 
 
