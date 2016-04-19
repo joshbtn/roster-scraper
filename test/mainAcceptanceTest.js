@@ -33,8 +33,8 @@ describe("ndoe main.js --roster NFL.js --format csv --out test.csv", function() 
         var command = "node main.js --config " + configPath + " --format csv --out " + outputPath;
         console.log(command)
         exec(command, expectStdoutToContain(text, function(){
-            //fs.accessSync(outputPath, fs.F_OK);
-            //fs.unlinkSync(outputPath)
+            fs.accessSync(outputPath, fs.F_OK);
+            fs.unlinkSync(outputPath)
             done();
         }));
     });
