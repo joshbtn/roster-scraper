@@ -3,11 +3,7 @@ const crypto = require('crypto');
 
 const secret = '';
 
-var nfl = {
-  "team": [{
-      "name": "Eagles",
-      "uri": "http://www.philadelphiaeagles.com/",
-      "roster": {
+var nfl = [{
         "uri": "http://www.philadelphiaeagles.com/team/roster.html",
         "document": "",
         "dataSelector": {
@@ -58,8 +54,7 @@ var nfl = {
 
         }
       }
-    }
+    
   ]
-}
 
 module.exports = nfl;

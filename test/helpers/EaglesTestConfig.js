@@ -3,12 +3,8 @@
 const fs = require('fs');
 const Dom = require(__dirname + "/../../lib/Dom");
 
-module.exports = {
-  "team": [
+module.exports =  [
     {
-      "name": "Eagles",
-      "uri": "",
-      "roster": {
         "uri": "",
         "document": fs.readFileSync(__dirname + "/../assets/nfl_eagles.html").toString(),
         "dataSelector" : {
@@ -31,6 +27,5 @@ module.exports = {
           }
         }
       }
-    }
+    
   ]
-}
