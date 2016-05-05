@@ -54,9 +54,7 @@ describe("Data", function() {
       expect(normalized2dArray[1].length).to.equal(expectedLenth);
       expect(normalized2dArray[2].length).to.equal(expectedLenth);
     });
-  });
-
-  describe("#normalize2dArrayLength()", function() {
+  
     it("should return original object when it comes across an item that is not an array.", function() {
       var normalized2dArray = Data.normalize2dArrayLength([
         [1, 2],
@@ -70,6 +68,8 @@ describe("Data", function() {
       expect(typeof normalized2dArray[1]).to.equal('function');
       expect(normalized2dArray[2].length).to.equal(expectedLenth);
     });
+    
+    
   });
 
   describe("#map2dArrayLengths()", function() {

@@ -4,57 +4,113 @@ const crypto = require('crypto');
 const secret = '';
 
 var nfl = [{
-        "uri": "http://www.philadelphiaeagles.com/team/roster.html",
-        "document": "",
-        "dataSelector": {
-          "id": function($, currentRowIndex, fullElementArray) {
-          
-            var getTextNodesIn = function(el) {
-              return el.find(":not(iframe)").addBack().contents().filter(function() {
-                return this.nodeType == 3;
-              });
-            };
+    "name": "Eagles",
+    "uri": "http://www.philadelphiaeagles.com/team/roster.html",
+    "document": "",
+    "dataSelector": {
+      "id": function($, currentRowIndex, fullElementArray) {
 
-            var rows = $("table tbody tr"),
-              currentRow = rows.eq(currentRowIndex), //:eq(" + currentRowIndex + ")",
-              name = getTextNodesIn($(currentRow).find("td.col-name a span")).text(),
-              position = getTextNodesIn($(currentRow).find("td.col-position")).text(),
-              first = name.split(',')[1].trim(),
-              last = name.split(',')[0].trim(),
-              to_hash = position + first + last;
+        var getTextNodesIn = function(el) {
+          return el.find(":not(iframe)").addBack().contents().filter(function() {
+            return this.nodeType == 3;
+          });
+        };
 
-            const hash = crypto.createHmac('sha1', secret)
-                   .update(to_hash)
-                   .digest('hex');
+        var rows = $("table tbody tr"),
+          currentRow = rows.eq(currentRowIndex), //:eq(" + currentRowIndex + ")",
+          name = getTextNodesIn($(currentRow).find("td.col-name a span")).text(),
+          position = getTextNodesIn($(currentRow).find("td.col-position")).text(),
+          first = name.split(',')[1].trim(),
+          last = name.split(',')[0].trim(),
+          to_hash = position + first + last;
 
-            return hash;
-          },
-          "number": "table tbody tr td.col-jersey",
-          "name": "table tbody tr td.col-name a span",
-          "position": "table tbody tr td.col-position",
-          "weight": "table tbody tr td.col-weight",
-          "height": "table tbody tr td.col-height",
-          "age": "table tbody tr td.col-bd",
-          "experience": "table tbody tr td.col-exp",
-          "college": "table tbody tr td.col-college",
-          "squad": function($, currentRowIndex, fullElementArray) {
-            var getTextNodesIn = function(el) {
-              return el.find(":not(iframe)").addBack().contents().filter(function() {
-                return this.nodeType == 3;
-              });
-            };
-            var rows = $("table tbody tr"),
-              currentRow = rows.eq(currentRowIndex), //:eq(" + currentRowIndex + ")",
-              table = $(currentRow).closest('table'),
-              squadHeader = $(table).prevAll('.mod-title-nobackground').find('h2'),
-              squad = getTextNodesIn(squadHeader).text();
+        const hash = crypto.createHmac('sha1', secret)
+          .update(to_hash)
+          .digest('hex');
 
-            return squad;
-          }
+        return hash;
+      },
+      "team": function(){return "Eagles"},
+      "number": "table tbody tr td.col-jersey",
+      "name": "table tbody tr td.col-name a span",
+      "position": "table tbody tr td.col-position",
+      "weight": "table tbody tr td.col-weight",
+      "height": "table tbody tr td.col-height",
+      "age": "table tbody tr td.col-bd",
+      "experience": "table tbody tr td.col-exp",
+      "college": "table tbody tr td.col-college",
+      "squad": function($, currentRowIndex, fullElementArray) {
+        var getTextNodesIn = function(el) {
+          return el.find(":not(iframe)").addBack().contents().filter(function() {
+            return this.nodeType == 3;
+          });
+        };
+        var rows = $("table tbody tr"),
+          currentRow = rows.eq(currentRowIndex), //:eq(" + currentRowIndex + ")",
+          table = $(currentRow).closest('table'),
+          squadHeader = $(table).prevAll('.mod-title-nobackground').find('h2'),
+          squad = getTextNodesIn(squadHeader).text();
 
-        }
+        return squad;
       }
-    
-  ]
+
+    }
+  },
+  
+  {
+    "name": "Ravens",
+    "uri": "http://www.baltimoreravens.com/team/roster.html",
+    "document": "",
+    "dataSelector": {
+      "id": function($, currentRowIndex, fullElementArray) {
+
+        var getTextNodesIn = function(el) {
+          return el.find(":not(iframe)").addBack().contents().filter(function() {
+            return this.nodeType == 3;
+          });
+        };
+
+        var rows = $("table tbody tr"),
+          currentRow = rows.eq(currentRowIndex), //:eq(" + currentRowIndex + ")",
+          name = getTextNodesIn($(currentRow).find("td.col-name a span")).text(),
+          position = getTextNodesIn($(currentRow).find("td.col-position")).text(),
+          first = name.split(',')[1].trim(),
+          last = name.split(',')[0].trim(),
+          to_hash = position + first + last;
+
+        const hash = crypto.createHmac('sha1', secret)
+          .update(to_hash)
+          .digest('hex');
+
+        return hash;
+      },
+      "team": function(){return "Ravens"},
+      "number": "table tbody tr td.col-jersey",
+      "name": "table tbody tr td.col-name a span",//One of these may be broken, which needs a test case.
+      "position": "table tbody tr td.col-position",
+      "weight": "table tbody tr td.col-weight",
+      "height": "table tbody tr td.col-height",
+      "age": "table tbody tr td.col-bd",
+      "experience": "table tbody tr td.col-exp",
+      "college": "table tbody tr td.col-college",
+      "squad": function($, currentRowIndex, fullElementArray) {
+        var getTextNodesIn = function(el) {
+          return el.find(":not(iframe)").addBack().contents().filter(function() {
+            return this.nodeType == 3;
+          });
+        };
+        var rows = $("table tbody tr"),
+          currentRow = rows.eq(currentRowIndex), //:eq(" + currentRowIndex + ")",
+          table = $(currentRow).closest('table'),
+          squadHeader = $(table).prevAll('.mod-title-nobackground').find('h2'),
+          squad = getTextNodesIn(squadHeader).text();
+
+        return squad;
+      }
+
+    }
+  }
+
+]
 
 module.exports = nfl;
