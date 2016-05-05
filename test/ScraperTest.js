@@ -121,8 +121,8 @@ describe("Scraper", function() {
       var scraper;
       scraper = new Scraper(eaglesTest);
       expect(typeof scraper.getConfig()).to.be.equal('object');
-      expect(Array.isArray(scraper.getConfig().team)).to.be.equal(true);
-      expect(scraper.getConfig().team.length).to.be.equal(1);
+      expect(Array.isArray(scraper.getConfig())).to.be.equal(true);
+      expect(scraper.getConfig().length).to.be.equal(1);
     });
   });
   
