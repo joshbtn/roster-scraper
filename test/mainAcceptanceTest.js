@@ -29,12 +29,16 @@ describe("ndoe main.js --roster NFL.js --format csv --out test.csv", function() 
     it("should create a csv file", function(done){
         var text = "Loading roster module";
         var configPath = __dirname + '/../rosters/NFL.js';
-        var outputPath  = __dirname + "/test_json_output.out.csv";
+        var outputPath  = __dirname + "/test_csv_output.csv";
         var command = "node main.js --config " + configPath + " --format csv --out " + outputPath;
         console.log(command)
         exec(command, expectStdoutToContain(text, function(){
             fs.accessSync(outputPath, fs.F_OK);
-            fs.unlinkSync(outputPath)
+            var file_contents = fs.readFileSync(outputPath).toString();
+            //TODO test file contents.
+            expect(true).to.be.equal(false);
+            
+            //fs.unlinkSync(outputPath)
             done();
         }));
     });

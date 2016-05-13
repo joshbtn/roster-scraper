@@ -117,12 +117,12 @@ describe("Scraper", function() {
   });
   
   describe("getConfig()", function() {
-    it("should return an object with 1 team for the eaglesTest", function(){
+    it("should return an object with 2 teams for the eaglesTest", function(){
       var scraper;
       scraper = new Scraper(eaglesTest);
       expect(typeof scraper.getConfig()).to.be.equal('object');
       expect(Array.isArray(scraper.getConfig())).to.be.equal(true);
-      expect(scraper.getConfig().length).to.be.equal(1);
+      expect(scraper.getConfig().length).to.be.equal(2);
     });
   });
   
@@ -148,44 +148,44 @@ describe("Scraper", function() {
         expect(Table.isTable(data)).to.be.equal(true);
       });
       
-      it("should return 9 columns",function(){
-        expect(data.length).to.be.equal(9);
+      it("should return 10 columns",function(){
+        expect(data.length).to.be.equal(10);
       });
       
       it("should return 68 number rows", function(){
-        expect(data[0].length).to.be.equal(68);
+        expect(data[0].length).to.be.equal(158);
       });
       
       it("should return 68 name rows", function(){
-        expect(data[1].length).to.be.equal(68);
+        expect(data[1].length).to.be.equal(158);
       });
       
       it("should return 68 position rows", function(){
-        expect(data[2].length).to.be.equal(68);
+        expect(data[2].length).to.be.equal(158);
       });
       
       it("should return 68 weight rows", function(){
-        expect(data[3].length).to.be.equal(68);
+        expect(data[3].length).to.be.equal(158);
       });
       
       it("should return 68 height rows", function(){
-        expect(data[4].length).to.be.equal(68);
+        expect(data[4].length).to.be.equal(158);
       });
       
       it("should return 68 age rows", function(){
-        expect(data[5].length).to.be.equal(68);
+        expect(data[5].length).to.be.equal(158);
       });
       
       it("should return 68 experience rows", function(){
-        expect(data[6].length).to.be.equal(68);
+        expect(data[6].length).to.be.equal(158);
       });
       
       it("should return 68 college rows", function(){
-        expect(data[7].length).to.be.equal(68);
+        expect(data[7].length).to.be.equal(158);
       });
       
       it("should return 68 squad rows", function(){
-        expect(data[8].length).to.be.equal(68);
+        expect(data[8].length).to.be.equal(158);
       });
       
       it("should return active for the first row in the squad col.", function(){
@@ -204,7 +204,7 @@ describe("Scraper", function() {
         data = scrapper.getHeadings(0);
          
         expect(Array.isArray(data)).to.be.equal(true);
-        expect(data.length).to.be.equal(9);
+        expect(data.length).to.be.equal(10);
     });
   });
 

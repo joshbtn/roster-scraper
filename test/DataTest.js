@@ -41,7 +41,7 @@ describe("Data", function() {
   });
 
   describe("#normalize2dArrayLength()", function() {
-    it("should return a 2d array where sub arrays are equal length", function() {
+    it("should return a 2d array where sub arrays are not equal length", function() {
       var normalized2dArray = Data.normalize2dArrayLength([
         [1, 2],
         [1],
